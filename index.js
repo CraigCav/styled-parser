@@ -8,7 +8,8 @@ const get = require('lodash.get')
 
 const parse = (code, opts = {}) => {
   const ast = babylon.parse(code, {
-    sourceType: 'module'
+    sourceType: 'module',
+    ...opts
   })
 
   let styledComponentsVarName
