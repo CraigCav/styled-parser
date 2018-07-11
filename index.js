@@ -100,7 +100,13 @@ const parse = (code, opts = {}) => {
       if (callee === styledComponentsVarName) {
         styledComponents.push({
           type:
-            path.node.tag.arguments[0].value || path.node.tag.arguments[0].name,
+            path.node.tag.arguments[0].value ||
+            path.node.tag.arguments[0].name ||
+            (path.node.tag.arguments[0].object &&
+              `${path.node.tag.arguments[0].object.name}.${
+                path.node.tag.arguments[0].property.name
+              }`) ||
+            variableDeclarationName,
           styles: getStyles(path),
           name: variableDeclarationName
         });
